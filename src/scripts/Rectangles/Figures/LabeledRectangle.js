@@ -11,16 +11,23 @@ function LabeledRectangle(cfg) {
     this.borderColor = cfg.borderColor ? cfg.borderColor : "#000000";
     this.fontColor = cfg.fontColor ? cfg.fontColor : "#000000";
 
-    var defaultBackgroundColor
-
-    this.draw = function (ctx) {
+    this.draw = function (ctx, deltaX, deltaY) {
+        debugger;
+        if (!deltaX) {
+            deltaX = 0;
+        }
+        if (!deltaY) {
+            deltaY = 0;
+        }
         if (ctx) {
+            var rectanglePositionX = this.position.x + deltaX;
+            var rectanglePositionY = this.position.y + deltaY;
             ctx.fillStyle = this.backgroundColor;
-            ctx.fillRect(this.position.x, this.position.y, this.size.width, this.size.height);
+            ctx.fillRect(rectanglePositionX, rectanglePositionY, this.size.width, this.size.height);
 
             var fontPosition = new Position({
-                    x: this.position.x + this.size.width / 2,
-                    y: this.position.y + this.size.height / 2
+                    x: rectanglePositionX + this.size.width / 2,
+                    y: rectanglePositionY + this.size.height / 2
                 });
             ctx.fillStyle = this.fontColor;
             ctx.fillText(this.label, fontPosition.x, fontPosition.y);

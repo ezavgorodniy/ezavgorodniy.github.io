@@ -37,4 +37,28 @@ function DrawingArea(cfg) {
 
     var elementInsertBefore = cfg.elementInsertBefore ? cfg.elementInsertBefore : defaultElementInsertBefore;
     document.body.insertBefore(this.canvas, elementInsertBefore);
+
+    this.moveViewPortDown = function(delta) {
+        this.moveViewPort(0, -delta);
+    };
+    this.moveViewPortUp = function(delta) {
+        this.moveViewPort(0, delta);
+    };
+    this.moveViewPortLeft = function(delta) {
+        this.moveViewPort(-delta, 0);
+    };
+    this.moveViewPortRight = function(delta) {
+        this.moveViewPort(delta, 0);
+    };
+    this.moveViewPort = function(deltaX, deltaY)
+    {
+        var viewport = this.viewport;
+        var position = viewport.getPosition();
+
+        this.viewport.setPosition(new Position({
+            x: position.x + deltaX,
+            y: position.y + deltaY
+        }));
+        this.viewport.update();
+    };
 }
