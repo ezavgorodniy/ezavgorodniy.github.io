@@ -12,7 +12,6 @@ function LabeledRectangle(cfg) {
     this.fontColor = cfg.fontColor ? cfg.fontColor : "#000000";
 
     this.draw = function (ctx, deltaX, deltaY) {
-        debugger;
         if (!deltaX) {
             deltaX = 0;
         }
