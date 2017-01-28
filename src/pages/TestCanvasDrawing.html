@@ -1,53 +1,132 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <style>
-        canvas {
-            border:1px solid #d3d3d3;
-            background-color: #f1f1f1;
-        }
-    </style>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="../scripts/Rectangles/Common/UserException.js"></script>
-    <script src="../scripts/Rectangles/Common/Position.js"></script>
-    <script src="../scripts/Rectangles/Common/Size.js"></script>
-    <script src="../scripts/Rectangles/Figures/LabeledRectangle.js"></script>
-    <script src="../scripts/Rectangles/Figures/Viewport.js"></script>
-    <script src="../scripts/Rectangles/Figures/DrawingArea.js"></script>
-    <script src="../scripts/Rectangles/DummyData.js"></script>
-    <script src="../scripts/TestRectangles.js"></script>
-</head>
-<body>
-    <table>
-        <tr>
-            <td>
-            </td>
-            <td>
-                <a href="#" id="btnUp">Viewport up</a>
-            </td>
-            <td>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <a href="#" id="btnLeft">Viewport left</a>
-            </td>
-            <td>
-            </td>
-            <td>
-                <a href="#" id="btnRight">Viewport right</a>
-            </td>
-        </tr>
-        <tr>
-            <td>
-            </td>
-            <td>
-                <a href="#" id="btnDown">Viewport down</a>
-            </td>
-            <td>
-            </td>
-        </tr>
-    </table>
-</body>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <style>
+            canvas {
+                border:1px solid #d3d3d3;
+                background-color: #f1f1f1;
+            }
+            input[type='number'] {
+                width: 50px;
+            }
+        </style>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="../scripts/Rectangles/Common/UserException.js"></script>
+        <script src="../scripts/Rectangles/Common/Position.js"></script>
+        <script src="../scripts/Rectangles/Common/Size.js"></script>
+        <script src="../scripts/Rectangles/Figures/LabeledRectangle.js"></script>
+        <script src="../scripts/Rectangles/Figures/Viewport.js"></script>
+        <script src="../scripts/Rectangles/Figures/DrawingArea.js"></script>
+        <script src="../scripts/TestRectangles.js"></script>
+    </head>
+    <body>
+        <canvas id="canvasRectangles"></canvas>
+        <table>
+            <tr>
+                <td>
+                </td>
+                <td>
+                    <a href="#" id="btnUp">Viewport up</a>
+                </td>
+                <td>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="#" id="btnLeft">Viewport left</a>
+                </td>
+                <td>
+                </td>
+                <td>
+                    <a href="#" id="btnRight">Viewport right</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                </td>
+                <td>
+                    <a href="#" id="btnDown">Viewport down</a>
+                </td>
+                <td>
+                </td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td>
+                    Rows count:
+                </td>
+                <td>
+                    <input type="number" id="inputRowsAmount" value="7"/>
+                </td>
+                <td>
+                    Distance between rectangles:
+                </td>
+                <td>
+                    <input type="number" id="inputDistance" value="10"/>
+                </td>
+                <td>
+                    Rectangle Height:
+                </td>
+                <td>
+                    <input type="number" id="inputRectangleHeight" value="80"/>
+                </td>
+                <td>
+                    Viewport width:
+                </td>
+                <td>
+                    <input type="number" id="inputViewportWidth" value="10000"/>
+                </td>
+                <td>
+                    Min rectangle width:
+                </td>
+                <td>
+                    <input type="number" id="inputMinRectangleWidth" value="20"/>
+                </td>
+                <td>
+                    Max rectangle width:
+                </td>
+                <td>
+                    <input type="number" id="inputMaxRectangleWidth" value="100"/>
+                </td>
+                <td>
+                    Moving interval:
+                </td>
+                <td>
+                    <input type="number" id="inputMovingInterval" value="20"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="button" id="btnRegenerate" value="Regenerate"/>
+                </td>
+                <td>
+                    <input type="button" id="btnStartTimer" value="Start Timer"/>
+                </td>
+                <td>
+                    <input type="button" id="btnStopTimer" value="Stop Timer"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Rectangles amount:
+                </td>
+                <td>
+                    <span id="spanRectanglesAmount"></span>
+                </td>
+                <td>
+                    Time:
+                </td>
+                <td>
+                    <span id="spanTime"></span>
+                </td>
+            </tr>
+        </table>
+    </body>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $.TestRectanglesApplication.startApplication();
+        });
+    </script>
 </html>
