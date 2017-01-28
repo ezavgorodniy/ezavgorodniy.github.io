@@ -39,10 +39,10 @@ function DrawingArea(cfg) {
     document.body.insertBefore(this.canvas, elementInsertBefore);
 
     this.moveViewPortDown = function(delta) {
-        this.moveViewPort(0, -delta);
+        this.moveViewPort(0, delta);
     };
     this.moveViewPortUp = function(delta) {
-        this.moveViewPort(0, delta);
+        this.moveViewPort(0, -delta);
     };
     this.moveViewPortLeft = function(delta) {
         this.moveViewPort(-delta, 0);
