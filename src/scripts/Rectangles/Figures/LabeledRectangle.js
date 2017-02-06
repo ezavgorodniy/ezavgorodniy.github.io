@@ -11,22 +11,40 @@ function LabeledRectangle(cfg) {
     this.borderColor = cfg.borderColor ? cfg.borderColor : "#000000";
     this.fontColor = cfg.fontColor ? cfg.fontColor : "#000000";
 
-    this.draw = function (ctx, deltaX, deltaY) {
+    this.draw = function (ctx, deltaX, deltaY, zoomLevel) {
         if (!deltaX) {
             deltaX = 0;
         }
         if (!deltaY) {
             deltaY = 0;
         }
+        if (!zoomLevel) {
+            zoomLevel = 1.0;
+        }
+
         if (ctx) {
             var rectanglePositionX = this.position.x + deltaX;
             var rectanglePositionY = this.position.y + deltaY;
+            var rectangleWidth = this.size.width;
+            var rectangleHeight = this.size.height;
+
+            var labelPositionX = rectanglePositionX + rectangleWidth / 2;
+            var labelPositionY = rectanglePositionY + rectangleHeight / 2;
+
+
+            rectanglePositionX *= zoomLevel;
+            rectanglePositionY *= zoomLevel;
+            rectangleWidth *= zoomLevel;
+            rectangleHeight *= zoomLevel;
+            labelPositionX *= zoomLevel;
+            labelPositionY *= zoomLevel;
+
             ctx.fillStyle = this.backgroundColor;
-            ctx.fillRect(rectanglePositionX, rectanglePositionY, this.size.width, this.size.height);
+            ctx.fillRect(rectanglePositionX, rectanglePositionY, rectangleWidth, rectangleHeight);
 
             var fontPosition = new Position({
-                    x: rectanglePositionX + this.size.width / 2,
-                    y: rectanglePositionY + this.size.height / 2
+                    x: labelPositionX,
+                    y: labelPositionY
                 });
             ctx.fillStyle = this.fontColor;
             ctx.fillText(this.label, fontPosition.x, fontPosition.y);
@@ -34,5 +52,30 @@ function LabeledRectangle(cfg) {
         else {
             throw UserException("context is undefined for draw labeled rectangle");
         }
-    }
+    };
+
+    this.getDrawingArea = function (deltaX, deltaY, zoomLevel) {
+        if (!deltaX) {
+            deltaX = 0;
+        }
+        if (!deltaY) {
+            deltaY = 0;
+        }
+        if (!zoomLevel) {
+            zoomLevel = 1.0;
+        }
+
+
+        var rectanglePositionX = this.position.x + deltaX;
+        var rectanglePositionY = this.position.y + deltaY;
+        var rectangleWidth = this.size.width;
+        var rectangleHeight = this.size.height;
+
+        return {
+            left: rectanglePositionX * zoomLevel,
+            right: (rectanglePositionX + rectangleWidth) * zoomLevel,
+            top: rectanglePositionY * zoomLevel,
+            bottom: (rectanglePositionY + rectangleHeight) * zoomLevel
+        };
+    };
 }

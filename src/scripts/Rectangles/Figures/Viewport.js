@@ -70,8 +70,21 @@ function Viewport() {
         this.clearCanvas();
         for (var i = 0; i < elements.length; i++) {
             var element = elements[i];
-            if (element && element.draw) {
-                element.draw(this.context, currentPosition.x, currentPosition.y);
+            if (element) {
+                var canDraw = true;
+                if (element.getDrawingArea) {
+                    var drawingArea = element.getDrawingArea(currentPosition.x, currentPosition.y, 1.0);
+                    if ((drawingArea.right < 0 && drawingArea.left) ||
+                        (drawingArea.top < 0 && drawingArea.bottom < 0) ||
+                        (drawingArea.left > this.canvas.width && drawingArea.right > this.canvas.width) ||
+                        (drawingArea.bottom > this.canvas.height && drawingArea.top > this.canvas.height)) {
+                        canDraw = false;
+                    }
+                }
+
+                if (canDraw && element.draw) {
+                    element.draw(this.context, currentPosition.x, currentPosition.y, 1.0);
+                }
             }
         }
     };
